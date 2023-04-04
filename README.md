@@ -1,7 +1,16 @@
 # Olist
 Piloter la stratégie marketing
 
-## Data base 
+# Mise en place du projet
+
+## Env
+python -m virtualenv .env
+
+## Install packages
+pip install -r requirements.txt
+
+
+# Data base 
 
 NAME': 'olist', 
 USER': 'postgres',

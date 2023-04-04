@@ -4,10 +4,13 @@ Piloter la stratégie marketing
 # Mise en place du projet
 
 ## Env
-python -m virtualenv .env
+`python -m virtualenv .env`
+
+## Activier l'environnement
+`env\Scripts\activate.bat`
 
 ## Install packages
-pip install -r requirements.txt
+`pip install -r requirements.txt`
 
 
 # Data base 

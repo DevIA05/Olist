@@ -9,3 +9,6 @@ def component_alert(request):
 
 def test(request):
     return render(request, 'test.html')
+
+def charts(request):
+    return render(request, 'charts-chartjs.html')

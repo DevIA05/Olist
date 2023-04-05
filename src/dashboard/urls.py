@@ -7,4 +7,6 @@ urlpatterns = [
     path('component', views.component_alert, name="ca"),
     path('test', views.test, name="test"),
     path('charts', views.charts, name="charts"),
+    path('general', views.GeneralTables, name="general"),
+    path('data', views.DataTables, name="data"),
 ]

@@ -12,3 +12,9 @@ def test(request):
 
 def charts(request):
     return render(request, 'charts-chartjs.html')
+
+def GeneralTables(request):
+    return render(request, 'tables-general.html')
+
+def DataTables(request):
+    return render(request, 'tables-data.html')

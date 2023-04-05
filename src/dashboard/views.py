@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
 def index(request):
@@ -6,3 +6,6 @@ def index(request):
 
 def component_alert(request):
     return render(request, 'components-alerts.html')
+
+def test(request):
+    return render(request, 'test.html')

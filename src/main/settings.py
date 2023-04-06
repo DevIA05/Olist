@@ -101,16 +101,16 @@ if hostname == "DESKTOP-44HMP7J":
 else:
     password = "admin"
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'olist', 
-        'USER': 'postgres',
-        'PASSWORD': password,
-        'HOST': '127.0.0.1', 
-        'PORT': '5432',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'olist', 
+#         'USER': 'postgres',
+#         'PASSWORD': password,
+#         'HOST': '127.0.0.1', 
+#         'PORT': '5432',
+#     }
+# }
 
 
 # Password validation

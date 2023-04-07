@@ -1,9 +1,9 @@
 from rest_framework import serializers
-from olist.models import CustomerIds
+from olist.models import Customer
 
 
-class CustomersIdsSerializer(serializers.ModelSerializer):
+class CustomerSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = CustomerIds
+        model = Customer
         fields = '__all__'

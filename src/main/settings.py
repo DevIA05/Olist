@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 import os
 from pathlib import Path
-import socket
+import subprocess
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -94,9 +94,8 @@ WSGI_APPLICATION = 'main.wsgi.application'
 #     }
 # }
 
-# Définir le mot de passe en fonction du nom du PC
-hostname = socket.gethostname()
-if hostname == "DESKTOP-44HMP7J":
+branch_name = subprocess.check_output(['git', 'rev-parse', '--abbrev-ref', 'HEAD']).strip().decode('utf-8')
+if branch_name == 'Terence':
     password = "0000"
 else:
     password = "admin"
@@ -106,7 +105,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'olist', 
         'USER': 'postgres',
-        'PASSWORD': '0000',
+        'PASSWORD': password,
         'HOST': '127.0.0.1', 
         'PORT': '5432',
     }

@@ -15,8 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework import routers
+from api.urls import router as Customer_router
 
+###
+#A faire pour chacune des App qu'on veux utiliser
+router = routers.DefaultRouter()
+router.registry.extend(Customer_router.registry)
+###
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('dashboard.urls')),
+    path('api/',include(router.urls)),
 ]

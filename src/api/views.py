@@ -1,10 +1,13 @@
 
+from django import template
 from rest_framework.response import Response
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework import viewsets
+from django.http import HttpResponse
+from django.template import loader
 from django.db.models import Count, Avg, Sum, Max, Min
 from olist.models import Customer, Order, Geolocation, OrderPayment
-from api.serializers import CustomerSerializer, OrderSerializers, GeolocationSerializer, GeolocationTop10Serializer, OrderPaymentSerializer
+from api.serializers import CustomerSerializer, OrderSerializers, GeolocationSerializer, GeolocationTop10Serializer, OrderPaymentSerializer, Chiffre_daffaireSerializer
 
 
 class CustomerSet(ReadOnlyModelViewSet):
@@ -46,9 +49,15 @@ class GeolocationTop10(ReadOnlyModelViewSet):
 class OrderPaymentViewset(ReadOnlyModelViewSet):
     serializer_class = OrderPaymentSerializer
     queryset = OrderPayment.objects.all().order_by('payment_value')[:100]
-    CA = OrderPayment.objects.all().aggregate(Sum('payment_value'))
-    print('______________________________________')
-    print(CA)
-    print('______________________________________')
-    print(type(CA))
-    print('______________________________________')
+
+
+class Chiffre_daffaire(ReadOnlyModelViewSet):
+    serializer_class = Chiffre_daffaireSerializer
+    preCA = OrderPayment.objects.all().aggregate(Sum('payment_value')).items()
+    queryset = preCA
+    print('__________________vvvv____________________')
+    print('__________________________________________')
+    print(type(queryset))
+    print('__________________________________________')
+    print('__________________^^^^____________________')
+

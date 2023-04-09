@@ -33,3 +33,10 @@ class OrderPaymentSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrderPayment
         fields = ('__all__')
+
+class Chiffre_daffaireSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = OrderPayment
+        fields = ('__all_')
+        

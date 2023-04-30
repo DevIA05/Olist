@@ -11,33 +11,38 @@ from api.serializers import CustomerSerializer, OrderSerializers, GeolocationSer
 
 
 class CustomerSet(ReadOnlyModelViewSet):
-    #Je vais indiquer, quelles sont les données que je veux manipuler dans cette vue
-    queryset = Customer.objects.all().order_by('zip_code_prefix') #Le [:100] me permet d'afficher seulement 10 résultats
+    # Je vais indiquer, quelles sont les données que je veux manipuler dans cette vue
+    # Le [:100] me permet d'afficher seulement 10 résultats
+    queryset = Customer.objects.all().order_by('zip_code_prefix')
     serializer_class = CustomerSerializer
 
 
 class OrderViewset(ReadOnlyModelViewSet):
     serializer_class = OrderSerializers
     queryset = Order.objects.all().order_by('customer_id')
-    
+
     # def list(self, request):
     #     return Response({})
 
+
 class OrderTop10(ReadOnlyModelViewSet):
     serializer_class = OrderSerializers
-    queryset = Order.objects.all().order_by('customer_id')[:10] #Le [:10] me permet d'afficher seulement 10 résultats
+    # Le [:10] me permet d'afficher seulement 10 résultats
+    queryset = Order.objects.all().order_by('customer_id')[:10]
 
 
 class CustomerTop10(ReadOnlyModelViewSet):
     serializer_class = CustomerSerializer
-    queryset = Customer.objects.all().order_by('zip_code_prefix')[:10] # Le order_by me permet de les ordonner  de manière
-    # décroissante en fonction du zip_code_prefix, j'ai choisis le zip_code_prefix pour qu'il soit cohérent avec la class 
+    # Le order_by me permet de les ordonner  de manière
+    queryset = Customer.objects.all().order_by('zip_code_prefix')[:10]
+    # décroissante en fonction du zip_code_prefix, j'ai choisis le zip_code_prefix pour qu'il soit cohérent avec la class
     # CustomerSet
 
 
 class GeolocationViewset(ReadOnlyModelViewSet):
     serializer_class = GeolocationSerializer
-    queryset = Geolocation.objects.all().order_by('geolocation_id')[:100] # Celui-ci ainsi que GeolocationTop10 ont été ordonnés
+    # Celui-ci ainsi que GeolocationTop10 ont été ordonnés
+    queryset = Geolocation.objects.all().order_by('geolocation_id')[:100]
     # en fonction du même champ c-a-d geolocation_id, dans un souci de cohérence visuelle
 
 
@@ -54,10 +59,3 @@ class OrderPaymentViewset(ReadOnlyModelViewSet):
 class Chiffre_daffaire(ReadOnlyModelViewSet):
     serializer_class = Chiffre_daffaireSerializer
     preCA = OrderPayment.objects.all().aggregate(Sum('payment_value')).items()
-    queryset = preCA
-    print('__________________vvvv____________________')
-    print('__________________________________________')
-    print(type(queryset))
-    print('__________________________________________')
-    print('__________________^^^^____________________')
-

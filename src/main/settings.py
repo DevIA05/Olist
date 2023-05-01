@@ -10,7 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+import os
 from pathlib import Path
+import subprocess
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -39,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'django_filters',
-
+    'dashboard',
     'olist',
 ]
 
@@ -65,7 +68,7 @@ ROOT_URLCONF = 'main.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, "main/templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -91,12 +94,18 @@ WSGI_APPLICATION = 'main.wsgi.application'
 #     }
 # }
 
+branch_name = subprocess.check_output(['git', 'rev-parse', '--abbrev-ref', 'HEAD']).strip().decode('utf-8')
+if branch_name == 'Terence':
+    password = "0000"
+else:
+    password = "admin"
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'olist', 
         'USER': 'postgres',
-        'PASSWORD': '0000',
+        'PASSWORD': password,
         'HOST': '127.0.0.1', 
         'PORT': '5432',
     }

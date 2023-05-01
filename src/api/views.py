@@ -3,7 +3,7 @@ from django import template
 from rest_framework.response import Response
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework import viewsets
-from django.http import HttpResponse
+from rest_framework.decorators import api_view
 from django.template import loader
 from django.db.models import Count, Avg, Sum, Max, Min
 from olist.models import Customer, Order, Geolocation, OrderPayment
@@ -13,13 +13,13 @@ from api.serializers import CustomerSerializer, OrderSerializers, GeolocationSer
 class CustomerSet(ReadOnlyModelViewSet):
     # Je vais indiquer, quelles sont les données que je veux manipuler dans cette vue
     # Le [:100] me permet d'afficher seulement 10 résultats
-    queryset = Customer.objects.all().order_by('zip_code_prefix')
+    queryset = Customer.objects.all().order_by('zip_code_prefix')[:100]
     serializer_class = CustomerSerializer
 
 
 class OrderViewset(ReadOnlyModelViewSet):
     serializer_class = OrderSerializers
-    queryset = Order.objects.all().order_by('customer_id')
+    queryset = Order.objects.all().order_by('customer_id')[:100]
 
     # def list(self, request):
     #     return Response({})
@@ -58,4 +58,10 @@ class OrderPaymentViewset(ReadOnlyModelViewSet):
 
 class Chiffre_daffaire(ReadOnlyModelViewSet):
     serializer_class = Chiffre_daffaireSerializer
-    preCA = OrderPayment.objects.all().aggregate(Sum('payment_value')).items()
+    queryset = OrderPayment.objects.all().aggregate(
+        Sum('payment_value')).items()
+
+    CA_total = queryset
+    print('___________________________________')
+    print(CA_total)
+    print('___________________________________')

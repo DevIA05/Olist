@@ -8,6 +8,7 @@ class CustomerSerializer(serializers.ModelSerializer):
         model = Customer
         fields = '__all__'
 
+
 class OrderSerializers(serializers.ModelSerializer):
 
     class Meta:
@@ -28,15 +29,16 @@ class GeolocationTop10Serializer(serializers.ModelSerializer):
         model = Geolocation
         fields = ('__all__')
 
+
 class OrderPaymentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = OrderPayment
         fields = ('__all__')
 
+
 class Chiffre_daffaireSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = OrderPayment
-        fields = ('__all_')
-        
+        fields = ('payment_value', 'order_id')

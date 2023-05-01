@@ -41,4 +41,4 @@ class Chiffre_daffaireSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = OrderPayment
-        fields = ('payment_value', 'order_id')
+        fields = ('__all__')

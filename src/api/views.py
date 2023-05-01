@@ -56,6 +56,8 @@ class OrderPaymentViewset(ReadOnlyModelViewSet):
     queryset = OrderPayment.objects.all().order_by('payment_value')[:100]
 
 
+# Attention, cette classe n'est pas encore fonctionnelle
+# Le lien http://127.0.0.1:8000/api/chiffre_daffaire/ mènera vers une erreur
 class Chiffre_daffaire(ReadOnlyModelViewSet):
     serializer_class = Chiffre_daffaireSerializer
     queryset = OrderPayment.objects.all().aggregate(

@@ -6,8 +6,8 @@ from rest_framework import viewsets
 from rest_framework.decorators import api_view
 from django.template import loader
 from django.db.models import Count, Avg, Sum, Max, Min
-from olist.models import Customer, Order, Geolocation, OrderPayment
-from api.serializers import CustomerSerializer, OrderSerializers, GeolocationSerializer, GeolocationTop10Serializer, OrderPaymentSerializer, Chiffre_daffaireSerializer
+from olist.models import Customer, Order, Geolocation, OrderPayment, OrderItems
+from api.serializers import CustomerSerializer, OrderSerializers, GeolocationSerializer, GeolocationTop10Serializer, Order_Item_Serializer, OrderPaymentSerializer, Chiffre_daffaireSerializer
 
 
 class CustomerSet(ReadOnlyModelViewSet):
@@ -28,13 +28,18 @@ class OrderViewset(ReadOnlyModelViewSet):
 class OrderTop10(ReadOnlyModelViewSet):
     serializer_class = OrderSerializers
     # Le [:10] me permet d'afficher seulement 10 résultats
-    queryset = Order.objects.all().order_by('customer_id')[:10]
+    queryset = Order.objects.all()
 
 
 class CustomerTop10(ReadOnlyModelViewSet):
-    serializer_class = CustomerSerializer
-    # Le order_by me permet de les ordonner  de manière
-    queryset = Customer.objects.all().order_by('zip_code_prefix')[:10]
+    serializer_class = Order_Item_Serializer
+    queryset = OrderItems.objects.values(
+        'product_id').annotate(count=Count('product_id'))
+    print("____________________________________________________________________________________________________________________")
+    print(queryset)
+    print("____________________________________________________________________________________________________________________")
+    # Le order_by me permet de les ordonner de manière
+    # queryset = Customer.objects.all().order_by('zip_code_prefix')[:10]
     # décroissante en fonction du zip_code_prefix, j'ai choisis le zip_code_prefix pour qu'il soit cohérent avec la class
     # CustomerSet
 
@@ -62,8 +67,3 @@ class Chiffre_daffaire(ReadOnlyModelViewSet):
     serializer_class = Chiffre_daffaireSerializer
     queryset = OrderPayment.objects.all().aggregate(
         Sum('payment_value')).items()
-
-    CA_total = queryset
-    print('___________________________________')
-    print(CA_total)
-    print('___________________________________')

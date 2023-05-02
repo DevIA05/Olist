@@ -9,18 +9,33 @@
 //   console.log(data);
 // }
 
-let myData;
+fetch("http://127.0.0.1:8000/api/orderTOP10/")
+  .then((response) => response.json())
+  .then((data) => {
+    const labels = data.map((item) => item.label);
+    const values = data.map((item) => item.value);
+    console.log(data);
+    const chartData = {
+      labels: labels,
+      datasets: [
+        {
+          label: "Mon graphique",
+          data: values,
+        },
+      ],
+    };
 
-function fetchMyData() {
-  const response = fetch("http://127.0.0.1:8000/api/customers/")
-    .then((response) => response.json())
-    .then((data) => {
-      // myData = data;
-      return data;
-      // Appel d'une fonction qui utilise myData
-    })
-    .catch((error) => console.error(error));
-  return response;
-}
-
-console.log(fetchMyData());
+    const ctx = document.getElementById("myChart").getContext("2d");
+    const myChart = new Chart(ctx, {
+      type: "bar",
+      data: chartData,
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: "top",
+          },
+        },
+      },
+    });
+  });

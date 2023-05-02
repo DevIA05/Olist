@@ -9,12 +9,18 @@
 //   console.log(data);
 // }
 
-let mydata;
-window.addEventListener("load", () => {
-  fetch("http://127.0.0.1:8000/api/customers/")
+let myData;
+
+function fetchMyData() {
+  const response = fetch("http://127.0.0.1:8000/api/customers/")
     .then((response) => response.json())
     .then((data) => {
-      myData = data;
+      // myData = data;
+      return data;
+      // Appel d'une fonction qui utilise myData
     })
     .catch((error) => console.error(error));
-});
+  return response;
+}
+
+console.log(fetchMyData());

@@ -22,10 +22,13 @@
                                 <canvas id="myChart"></canvas>
                                 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
                             </div>
-                            
+
+                            <script src="{%static 'assets/js/second.js' %}"></script>
+
                             <script>
-                                const var_data = "{{mydata|safe}}";
-                                console.log(var_data)
+                                
+
+                                console.warn(myData)
                                 const ctx = document.getElementById('myChart');
                                 new Chart(ctx, {
                                     type: 'bar',
@@ -75,6 +78,6 @@
 </main>
 
 {% block script_js %}
-<script src="{%static 'assets/js/second.js' %}"></script>
+<!-- <script src="{%static 'assets/js/second.js' %}"></script> -->
 {% endblock %}
 {% endblock %}

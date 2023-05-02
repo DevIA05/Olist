@@ -94,21 +94,21 @@ WSGI_APPLICATION = 'main.wsgi.application'
 #     }
 # }
 
-branch_name = subprocess.check_output(['git', 'rev-parse', '--abbrev-ref', 'HEAD']).strip().decode('utf-8')
-if branch_name == 'Terence':
-    password = "0000"
-else:
-    password = "admin"
+# branch_name = subprocess.check_output(['git', 'rev-parse', '--abbrev-ref', 'HEAD']).strip().decode('utf-8')
+# if branch_name == 'Terence':
+#     password = "0000"
+# else:
+#     password = "admin"
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'olist', 
         'USER': 'postgres',
-        'PASSWORD': password,
+        'PASSWORD': 'admin',
         'HOST': '127.0.0.1', 
         'PORT': '5432',
-    }
+    }   
 }
 
 
